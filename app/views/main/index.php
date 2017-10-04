@@ -1,0 +1,1 @@
+<h1> Main#index </h1> <p> Check app/views/main/index.php </p>
