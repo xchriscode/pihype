@@ -1,5 +1,5 @@
 <?php
-class dbMigrate
+class dbMigrate extends HelperClass
 {
 	
 }
