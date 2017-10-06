@@ -1,21 +1,19 @@
 <?php
 
+// Autoloader Helper function
+spl_autoload_register(function($class){
+	include_once("app/helpers/{$class}.php");
+});
+
 // #Helper Class, prepares GET requests 
 class HelperClass
-{
-	protected static $get = [];
-
-	// constructor function
-	function construct()
-	{
-		self::$get = isset($_GET['pid']) ? explode('/',rtrim($_GET['pid'],"/ ")) : "";
-	}
-
+{	
 	// Resources function
 	function resources($type)
 	{
-
+		
 	}
+
 }
 // #end helper class
 
@@ -24,34 +22,56 @@ class Router extends HelperClass
 {
 	// Get controllers count
 	private $controllers_count = 0;
-	
-	// Router Config
-	public function resources($obj)
-	{
-		
-	}
+	public static $_URL_ = "";
 
-	// Controller function
-	public static function controller($name)
+	// Config function
+	public static function config($array)
 	{
+		$config = (object) $array;
+
+		// check if session has been turned on
+		if($config->session == 1)
+		{
+			// start session
+			session_start();
+		}
+		else{ session_destroy(); }
+
 		// Include model control file
 		include_once("config/models.php");
 
 		// Include controller main control file
 		include_once("config/controller.php");
+
+		// ok check for secure header
+		if($config->secure_header == 1 && $config->session == 1 || $config->cookie == 1)
+		{
+			Controller::$headers = $config->header_look_for;
+		}
+
+		// ok check for secure footer
+		if($config->secure_footer == 1 && $config->session == 1 || $config->cookie == 1)
+		{
+			Controller::$footers = $config->footer_look_for;
+		}
+		
+	}
+
+
+	// Controller function
+	public static function controller($name)
+	{
 		
 		// load controller
 		include_once("app/controller/{$name}_controller.php");
 
 		// create an instance
-		$name = ucwords($name);
-		$instance = new $name;
-
-		$methods = get_class_methods($instance);
-
-		if(count($methods) > 0)
+		if(class_exists($name))
 		{
-			// check views
+			$name = ucwords($name);
+			$instance = new $name;
+
+			// check contoller view folder
 			$location = "app/views/".strtolower($name);
 			if(!is_dir($location))
 			{
@@ -59,79 +79,285 @@ class Router extends HelperClass
 				mkdir($location);
 			}
 
-			//create view if not found
-			foreach($methods as $key => $view)
-			{
-				// check if view can be found
-				if(!file_exists($location."/{$view}.php"))
-				{
-					$string = "<h1> {$name}#{$view} </h1> <p> Check {$location}/{$view}.php </p>";
-
-					$fh = fopen($location."/{$view}.php", "w");
-					fwrite($fh, $string);
-					fclose($fh);
-				}
-			}
+			// Return Controller class
+			return new Controller();	
 		}
-
-		// Return Controller class
-		return new Controller();
+		else
+		{
+			return false;
+		}
+		
 	}
+
 
 	// Route Views
 	public static function route_views($root, $obj)
 	{
+		$_URL_ = isset($_GET['gid']) ? explode('/',rtrim($_GET['gid'],"/ ")) : "";
+		self::$_URL_ = $_URL_;
+
 		// Make sure Argument is an array
 		if(is_array($obj))
-		{
-			if(count($obj) == 1 && $obj[0] == "*")
+		{		
+			// ok create controller and method by default
+			if(count($_URL_) > 0)
 			{
-				// global route
-				if(is_array(parent::$get) && count(parent::$get) > 0)
-				{
+				$location = "app/controller/";
 
-				}
-				else
+				foreach($obj as $cont => $meths)
 				{
-					// work on root directory
-					if(!empty($root))
+					// check if controller has been created
+					if(!file_exists($location."{$cont}_controller.php"))
 					{
-						$root = explode("#", $root);
-						// now check controller existance
-						if(file_exists("app/controller/{$root[0]}_controller.php"))
-						{
-							// load controller;
-							$controller = self::controller($root[0]);
+						// check if meths == "*"
+						if(trim($meths) == "*")
+						{	
+							$class = ucwords($cont);
+							$build = "
+<?php
+class {$class} extends Controller
+{
+	public function index()
+	{
 
-							// load view
-							if(isset($root[1]))
+	}
+}";
+							$fh = fopen($location."{$cont}_controller.php","w+");
+							fwrite($fh, $build);
+							fclose($fh);
+
+							// create view file
+							$view_location = "app/views/{$cont}";
+							if(!is_dir($view_location))
 							{
-								$controller->view("{$root[0]}/{$root[1]}");
+								// create view directory
+								mkdir($view_location);
+
+								// create view file
+								$string = "<h1> {$cont}/index </h1> <p> Check {$view_location}/index.php </p>";
+
+								$fh = fopen($view_location."/index.php", "w+");
+								fwrite($fh, $string);
+								fclose($fh);
 							}
 						}
 						else
 						{
-							// Throw error
-							die(strtoupper($root[0])." Controller not found!");
+							$meth = explode("#", $meths);
+							$class = ucwords($cont);
+// for proper indentation
+							$build = "
+<?php
+class {$class} extends Controller
+{
+	";
+
+							foreach($meth as $key => $m)
+							{
+// for proper indentation
+	$build .= "
+	public function {$m}()
+	{
+
+	}
+
+	";
+
+								// create view file
+								$view_location = "app/views/{$cont}";
+								if(!is_dir($view_location))
+								{
+									// create view directory
+									mkdir($view_location);	
+								}
+
+
+								// create view file
+								$string = "<h1> {$cont}/{$m} </h1> <p> Check {$view_location}/{$m}.php </p>";
+
+								$fh = fopen($view_location."/{$m}.php", "w+");
+								fwrite($fh, $string);
+								fclose($fh);
+							}
+// for proper indentation
+$build .=  "
+
+}
+";
+
+							$fh = fopen($location."{$cont}_controller.php", "w+");
+							fwrite($fh, $build);
+							fclose($fh);
 						}
-					} 
+					}
 				}
 			}
-			else
+
+
+			// load controller and view
+			if(!is_array(self::$_URL_))
 			{
-				// manage route
+				// load default
+				// work on root directory
+				if(!empty($root))
+				{
+					$root = explode("#", $root);
+					// now check controller existance
+					if(file_exists("app/controller/{$root[0]}_controller.php"))
+					{
+						// load controller;
+						$controller = self::controller($root[0]);
+
+						if($controller !== false)
+						{
+							// load view
+							if(isset($root[1]))
+							{
+								$controller->view("{$root[0]}/{$root[1]}");
+							}	
+						}
+						else
+						{
+							// throw controller error
+							die("Invalid controller {$root[0]}. Please create controller and reload this page.");
+						}
+
+						
+					}
+					else
+					{
+						// Throw error
+						die(strtoupper($root[0])." Controller not found!");
+					}
+				} 
+			}
+			else
+	  		{
+				// check if registered in router
+				$cont = self::$_URL_[0];
+				$meth = isset($_URL_[1]) ? $_URL_[1] :  "";
+				$other = isset($_URL_[2]) ? $_URL_[2] : "";
+
+				if(array_key_exists($cont, $obj) == true)
+				{
+					// check if value is "*" or specific
+					if($obj[$cont] == "*")
+					{
+						$controller = self::controller($cont);
+
+						// load all
+						if($meth == "")
+						{
+							if($controller !== false)
+							{
+								$controller->view("{$cont}/index");
+							}
+						}
+						else
+						{
+							if($controller !== false)
+							{
+								if(method_exists($cont, $meth))
+								{
+									if($other != "")
+									{
+										$class = new $cont;
+										$class->{$meth}($other);
+
+										// load view
+										$controller->view("{$cont}/{$meth}");
+									}
+									else
+									{
+										$class = new $cont;
+										$class->{$meth}();
+
+										// load view
+										$controller->view("{$cont}/{$meth}");
+									}
+								}
+								else
+								{
+									die("Cannot find > {$cont} > {$meth} in {$cont}_controller.php");
+								}
+							}
+
+						}
+					}
+					else
+					{
+						$controller = self::controller($cont);
+
+						// load all
+						if($meth == "")
+						{
+							if($controller !== false)
+							{
+								$controller->view("{$cont}/index");
+							}
+						}
+						else
+						{
+							if($controller !== false)
+							{
+								 $meths = explode("#", $obj[$cont]);
+								 // check if in array
+								 if(in_array($meth, $meths))
+								 {
+								 	if(method_exists($cont, $meth))
+									{
+										if($other != "")
+										{
+											$class = new $cont;
+											$class->{$meth}($other);
+
+											// load view
+											$controller->view("{$cont}/{$meth}");
+										}
+										else
+										{
+											$class = new $cont;
+											$class->{$meth}();
+
+											// load view
+											$controller->view("{$cont}/{$meth}");
+										}
+									}
+									else
+									{
+										die("Cannot find > {$cont} > {$meth} in {$cont}_controller.php");
+									}
+								 }
+								 else
+								 {
+								 	die("Invalid < {$meth}> View < {$cont} > in config/router.php ");
+								 }
+							}
+						}
+					}
+				}
+				else
+				{
+					die("Unknown controller < {$cont} >, not set in config/router.php");
+				}
 			}
 		}
 		else
 		{
 			die("Route Views Argument must be an array");
 		}
+		
+
+		return ["type" => "controller"];
 	}
 
 }
 
 // New Router instance
 $hpc = new HelperClass();
+
+// #Include Config file
+include_once("config/config.php");
 
 // #Include router file
 include_once("config/router.php");
