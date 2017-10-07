@@ -1,5 +1,5 @@
 <?php
-class Main extends Controller
+class Main extends AppController
 {
    function index($id="")
    {

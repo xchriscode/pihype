@@ -1,10 +1,5 @@
 <?php
 
-// Autoloader Helper function
-spl_autoload_register(function($class){
-	include_once("app/helpers/{$class}.php");
-});
-
 // #Helper Class, prepares GET requests 
 class HelperClass
 {	
@@ -16,6 +11,11 @@ class HelperClass
 
 }
 // #end helper class
+
+// Autoloader Helper function
+spl_autoload_register(function($class){
+	include_once("app/helpers/{$class}.php");
+});
 
 // Router Class
 class Router extends HelperClass
@@ -46,13 +46,13 @@ class Router extends HelperClass
 		// ok check for secure header
 		if($config->secure_header == 1 && $config->session == 1 || $config->cookie == 1)
 		{
-			Controller::$headers = $config->header_look_for;
+			AppController::$headers = $config->header_look_for;
 		}
 
 		// ok check for secure footer
 		if($config->secure_footer == 1 && $config->session == 1 || $config->cookie == 1)
 		{
-			Controller::$footers = $config->footer_look_for;
+			AppController::$footers = $config->footer_look_for;
 		}
 		
 	}
@@ -80,7 +80,7 @@ class Router extends HelperClass
 			}
 
 			// Return Controller class
-			return new Controller();	
+			return new AppController();	
 		}
 		else
 		{
@@ -95,6 +95,42 @@ class Router extends HelperClass
 	{
 		$_URL_ = isset($_GET['gid']) ? explode('/',rtrim($_GET['gid'],"/ ")) : "";
 		self::$_URL_ = $_URL_;
+
+		$model_call = "";
+
+		if(isset($_URL_[1]))
+		{
+			if(substr($_URL_[1], 0,1) != "@")
+			{
+				sess::save("METH",$_URL_[1]);
+			}
+			else
+			{
+				$model_call = substr($_URL_[1],1);
+				$_URL_[1] = sess::get("METH");
+			}
+		}
+		else
+		{
+			sess::save("METH","index");
+		}
+
+		if($model_call != "")
+		{
+			// get the model name
+			AppModel::$model_name = $model_call;
+			// get the method name
+			if(isset($_POST) and count($_POST) > 0)
+			{
+				$count = count($_POST);
+				$method = array_keys($_POST);
+				$method = $method[$count-1];
+				AppModel::$model_method = $method;	
+			}
+			
+		}
+
+		
 
 		// Make sure Argument is an array
 		if(is_array($obj))
@@ -170,7 +206,6 @@ class {$class} extends Controller
 									// create view directory
 									mkdir($view_location);	
 								}
-
 
 								// create view file
 								$string = "<h1> {$cont}/{$m} </h1> <p> Check {$view_location}/{$m}.php </p>";
@@ -347,7 +382,6 @@ $build .=  "
 			die("Route Views Argument must be an array");
 		}
 		
-
 		return ["type" => "controller"];
 	}
 
@@ -355,6 +389,9 @@ $build .=  "
 
 // New Router instance
 $hpc = new HelperClass();
+
+// #include db config file
+include_once("config/db.php");
 
 // #Include Config file
 include_once("config/config.php");

@@ -13,4 +13,26 @@ class sess
 			return false;
 		}
 	}
+
+	static function save($name, $val)
+	{
+		$_SESSION[$name] = $val;
+		return true;
+	}
+
+	static function out($name)
+	{
+		if(isset($_SESSION[$name]))
+		{
+			echo $_SESSION[$name];
+		}
+	}
+
+	static function get($name)
+	{
+		if(isset($_SESSION[$name]))
+		{
+			return $_SESSION[$name];
+		}
+	}
 }

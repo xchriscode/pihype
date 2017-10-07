@@ -1,6 +1,6 @@
 <?php
 
-class Controller extends Model 
+class AppController extends AppModel 
 {	
 	// @params current views 
 	private static $viewBox = [];

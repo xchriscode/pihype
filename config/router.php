@@ -10,7 +10,7 @@ $hpc->resources(
 	Router::route_views("main#index", [
 		// Set Other Url Mapping
 		// Single '*' means do a default routing for all requests
-		"about" => "index",
+		"about" => "index#contact",
 		"main" => "*"
 	])
 );
