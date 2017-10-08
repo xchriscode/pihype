@@ -1,12 +1,12 @@
-# Pihype
+Pihype
 A PHP Framework for faster and controlled development.
 Developed by Xchrisphp
 
-***********
-Version 1.0
-***********
+@Version 1.0
+************
 
-/#/ Features
+@Features
+*********
 
 1. MVC design pattern
 	-> Controller
@@ -26,29 +26,39 @@ Version 1.0
 3. Dynamic file inclusion and routing
 	// example
 	-> You want to get images from the public/images directory
-		# <?=local::img("image.png")?> , this will get the image and create the < img > tag
-		# Can take upto 2 parameters, 1 => image name 2 => attributes eg class="name" etc.
+		
+		 local::img("image.png")
+		  
+		  # This will get the image and create the < img > tag
+		  # Can take upto 2 parameters, 1 => image name 2 => attributes eg class="name" etc.
 
 	-> You want to load a css file from public/css
-		# <?=local::css("main", attributes (optional))?>, will create the link tag and include the main.css if found
+		
+		local::css("main", attributes (optional))
+		
+		# Will create the link tag and include the main.css if found
 		# Can take upto 2 parameters also
 
 	-> You want to load a javascript file from public/javascript
-		# <?=local::js("jquery", attributes(optional) )?>, will create the script tag and include the js file if found
+		
+		local::js("jquery", attributes(optional) )
+		
+		# Will create the script tag and include the js file if found
 
 	-> You want to route to another view within a controller 
-		# <?=local::linkTo("nextpage", "click me")?>
+		
+		local::linkTo("nextpage", "click me")
+		
 		# lets assume current controller is < home >
 		
-		will generate <a href="home/nextpage"> click me </a>
-
-		// or you want to include some attributes
-		# <?=local::linkTo("nextpage", 'class="btn"', "click me")?>
+		# Will generate <a href="home/nextpage"> click me </a>
+		# Or you want to include some attributes
 		
-		will generate <a href="home/nextpage" class="btn"> click me </a>
-
+		local::linkTo("nextpage", 'class="btn"', "click me")
+		
+		#will generate <a href="home/nextpage" class="btn"> click me </a>
 		# You can jump out of a controller like this
-		# <?=local::linkTo("contact/form", "contact us")?>
+		 local::linkTo("contact/form", "contact us")
 
 4. Views created dynamically and properly routed
 	// example
@@ -127,3 +137,9 @@ Version 1.0
 				}
 			}
 		}
+
+
+That's for the first release, more to come.
+Will share a video demo and will build a full functional web app with this framework.
+Thank you for using this framework, contributions are allowed please.
+
