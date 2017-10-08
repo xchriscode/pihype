@@ -156,17 +156,17 @@ Developed by Xchrisphp
 	I am from Nigeria, developed this framework to support the PHP Community and to encourage dynamic/responsive use of the PHP language. 
 	<br>
 	Framework can be used by companies, Freelancers etc.
-	<br>
+
 	# For your 
 		1. PHP
 		2. Python
 		3. Ruby on Rails
 		4. JS 
 		5. Ionic/Angular
-		 
-	# Projects, you can contact me or leave me an email
-	# email -> chrisallison.prog@yahoo.com
-	# phone -> +2348183789446
-	# FB profile -> https://web.facebook.com/chrisallison.prog 
+		
+		# Projects, you can contact me or leave me an email
+		# email -> chrisallison.prog@yahoo.com
+		# phone -> +2348183789446
+		# FB profile -> https://web.facebook.com/chrisallison.prog 
 
 
