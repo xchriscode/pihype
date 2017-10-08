@@ -11,9 +11,19 @@ class AppModel extends dbMigrate
 
 	public function model($model = "")
 	{
-		$model = self::$model_name;
-		$method = self::$model_method;
+		if(self::$model_name != "")
+		{
+			$model = self::$model_name;
+			$method = self::$model_method;
+		}
+		else
+		{
+			$args = explode("/", $model);
+			$model = strpos($args[0],"@") >= 0 ? substr($args[0], 1) : $args[0];
+			$method = isset($args[1]) ? $args[1] : "index";
+		}
 
+		
 		if(!empty($model))
 		{
 			// check destination folder < app/model >
@@ -33,6 +43,10 @@ class AppModel extends dbMigrate
 							// Run model now
 							$run = $class->{$method}();
 							return $run;
+						}
+						else
+						{
+							echo "Method [$method] not found in $location \n";
 						}
 					}
 				}

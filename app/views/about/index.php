@@ -1,1 +1,0 @@
-<h1> about/index </h1> <p> Check app/views/about/index.php </p>

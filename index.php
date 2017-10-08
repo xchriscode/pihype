@@ -393,6 +393,9 @@ $hpc = new HelperClass();
 // #include db config file
 include_once("config/db.php");
 
+// #Include url configuration
+include_once("config/url_config.php");
+
 // #Include Config file
 include_once("config/config.php");
 
