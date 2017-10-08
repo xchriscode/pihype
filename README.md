@@ -1,6 +1,7 @@
+
 <h1> Pihype </h1>
 A PHP Framework for faster and controlled development.
-Developed by Xchrisphp
+Developed by Xchriscode
 
 @Version 1.0
 ************
@@ -163,7 +164,7 @@ Developed by Xchrisphp
 		3. Ruby on Rails
 		4. JS 
 		5. Ionic/Angular
-		
+
 		# Projects, you can contact me or leave me an email
 		# email -> chrisallison.prog@yahoo.com
 		# phone -> +2348183789446
