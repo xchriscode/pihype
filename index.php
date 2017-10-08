@@ -248,8 +248,7 @@ $build .=  "
 							// load view
 							if(isset($root[1]))
 							{
-								echo 4;
-								//$controller->__view("{$root[0]}/{$root[1]}");
+								$controller->__view("{$root[0]}/{$root[1]}");
 							}	
 						}
 						else
