@@ -1,4 +1,4 @@
-Pihype
+<h1> Pihype </h1>
 A PHP Framework for faster and controlled development.
 Developed by Xchrisphp
 
@@ -9,18 +9,19 @@ Developed by Xchrisphp
 *********
 
 1. MVC design pattern
-	-> Controller
-	-> Model
-	-> Views
-
+	
+	Controller 
+	   Model
+	      Views
 	(Pratically built the way MVC should work)
 
 2. Multiple database system
-	*Can use*
-	-> Mysqli
-	-> Mysql
-	-> Mongodb
-	-> Sqlite
+	
+	#Can use
+	 1. Mysqli
+	 2. Mysql
+	 3. Mongodb
+	 4. Sqlite
 	and more..
 
 3. Dynamic file inclusion and routing
@@ -83,7 +84,7 @@ Developed by Xchrisphp
 			}
 		}
 
-5. Models can be generate data when a form is submited
+5. Models can generate data when a form is submited
 	// example
 	-> You need to create a contact form
 	-> in the app/views/home/contact.php we have this
@@ -139,7 +140,7 @@ Developed by Xchrisphp
 		}
 
 
-That's for the first release, more to come.
-Will share a video demo and will build a full functional web app with this framework.
-Thank you for using this framework, contributions are allowed please.
+ # That's for the first release, more to come.
+ # Will share a video demo and will build a full functional web app with this framework.
+ # Thank you for using this framework, contributions are allowed please.
 
