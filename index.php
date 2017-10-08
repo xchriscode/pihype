@@ -248,7 +248,8 @@ $build .=  "
 							// load view
 							if(isset($root[1]))
 							{
-								$controller->view("{$root[0]}/{$root[1]}");
+								echo 4;
+								//$controller->__view("{$root[0]}/{$root[1]}");
 							}	
 						}
 						else
@@ -285,7 +286,7 @@ $build .=  "
 						{
 							if($controller !== false)
 							{
-								$controller->view("{$cont}/index");
+								$controller->__view("{$cont}/index");
 							}
 						}
 						else
@@ -300,7 +301,7 @@ $build .=  "
 										$class->{$meth}($other);
 
 										// load view
-										$controller->view("{$cont}/{$meth}");
+										$controller->__view("{$cont}/{$meth}");
 									}
 									else
 									{
@@ -308,12 +309,12 @@ $build .=  "
 										$class->{$meth}();
 
 										// load view
-										$controller->view("{$cont}/{$meth}");
+										$controller->__view("{$cont}/{$meth}");
 									}
 								}
 								else
 								{
-									die("Cannot find > {$cont} > {$meth} in {$cont}_controller.php");
+									echo("Cannot find > {$cont} > {$meth} in {$cont}_controller.php");
 								}
 							}
 
@@ -328,7 +329,7 @@ $build .=  "
 						{
 							if($controller !== false)
 							{
-								$controller->view("{$cont}/index");
+								$controller->__view("{$cont}/index");
 							}
 						}
 						else
@@ -347,7 +348,7 @@ $build .=  "
 											$class->{$meth}($other);
 
 											// load view
-											$controller->view("{$cont}/{$meth}");
+											$controller->__view("{$cont}/{$meth}");
 										}
 										else
 										{
@@ -355,7 +356,7 @@ $build .=  "
 											$class->{$meth}();
 
 											// load view
-											$controller->view("{$cont}/{$meth}");
+											$controller->__view("{$cont}/{$meth}");
 										}
 									}
 									else

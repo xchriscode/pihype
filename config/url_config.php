@@ -26,7 +26,7 @@ class URL_CONFIG extends HelperClass
 		else
 		{
 			// Your development server URL 
-			self::$url = "http://127.0.0.1/xchrisphp/XchrisPHP/";
+			self::$url = "http://";
 		}
 
 		self::$getUrl = isset($_GET['gid']) ? explode('/',rtrim($_GET['gid'],"/ ")) : "";

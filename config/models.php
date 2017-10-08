@@ -15,12 +15,14 @@ class AppModel extends dbMigrate
 		{
 			$model = self::$model_name;
 			$method = self::$model_method;
+			$param = "";
 		}
 		else
 		{
 			$args = explode("/", $model);
 			$model = strpos($args[0],"@") >= 0 ? substr($args[0], 1) : $args[0];
-			$method = isset($args[1]) ? $args[1] : "index";
+			$method = isset($args[1]) ? $args[1] : "";
+			$param = isset($args[2]) ? $args[2] : "";
 		}
 
 		
@@ -41,12 +43,12 @@ class AppModel extends dbMigrate
 						if(method_exists($class, $method))
 						{	
 							// Run model now
-							$run = $class->{$method}();
+							$run = $class->{$method}($param);
 							return $run;
 						}
 						else
 						{
-							echo "Method [$method] not found in $location \n";
+							//echo "Method [$method] not found in $location \n";
 						}
 					}
 				}

@@ -12,25 +12,26 @@ class AppController extends AppModel
 	public static $footers = "";
 
 	// Final view function. This Sets up a controller view
-	final function view($path, $data="")
+	final function __view($path, $data="")
 	{
 		// check if view can be found
 
 		$array = explode('/', $path);
 
-		self::$viewBox[] = $array[1];
+		self::$viewBox[] = isset($array[1]) ? $array[1] : "";
 
-		$location = "app/views";
-		if(!file_exists($location."/{$path}.php"))
+		if(count($array) <= 2)
 		{
-			$string = "<h1> {$path} </h1> <p> Check {$location}/{$path}.php </p>";
+			$location = "app/views";
+			if(!file_exists($location."/{$path}.php"))
+			{
+				$string = "<h1> {$path} </h1> <p> Check {$location}/{$path}.php </p>";
 
-			$fh = fopen($location."/{$path}.php", "w");
-			fwrite($fh, $string);
-			fclose($fh);
+				$fh = fopen($location."/{$path}.php", "w");
+				fwrite($fh, $string);
+				fclose($fh);
+			}	
 		}
-
-		
 
 		// Make sure, only one view is loaded after a GET request.
 		if(count(self::$viewBox) == 1)
@@ -51,7 +52,7 @@ class AppController extends AppModel
 	protected final function routeTo($path, $data="")
 	{
 		// call view method
-		$this->view($path, $data);
+		$this->__view($path, $data);
 		// end current view display
 	}
 

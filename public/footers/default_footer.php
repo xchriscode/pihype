@@ -1,2 +1,2 @@
-<?php
-// Generated Footer file
+</body>
+</html>

@@ -87,8 +87,6 @@ class {$class_name} extends dbMigrate
 				// we have to delete it
 				unlink($location);
 			}
-			else
-			{
 				// ok we would create a new file and include our new database class
 				$fh = fopen($location, "w+");
 				$lower = strtolower($name);
@@ -106,7 +104,7 @@ class db extends {$class_name}
 				";
 				fwrite($fh, $write);
 				fclose($fh);
-			}
+			
 		}
 		else
 		{
@@ -117,12 +115,7 @@ class db extends {$class_name}
 
 				// check if we have db.php in helper folder
 				$location = "app/helpers/db.php";
-				if(file_exists($location))
-				{
-					// we have to delete it
-					unlink($location);
-				}
-				else
+				if(!file_exists($location))
 				{
 					// ok we would create a new file and include our new database class
 					$fh = fopen($location, "w+");

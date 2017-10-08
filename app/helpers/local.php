@@ -121,6 +121,23 @@ class Local extends URL_CONFIG
 
 			return $a;
 		}
+		else
+		{
+
+			// a link for current controller
+			$a = '<a href="'.self::$url.$name.'" ';
+
+			if($config != "" && strpos($config,"=") <= 0)
+			{
+				$a .= "> $config </a>";
+			}
+			else
+			{
+				$a .= " $config > $action </a>";
+			}
+
+			return $a;	
+		}
 	}
 
 	public static function css($name, $config = "")

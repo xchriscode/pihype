@@ -1,2 +1,6 @@
-<?php
-// Generated Header file
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
