@@ -10,9 +10,9 @@ Developed by Xchrisphp
 
 1. MVC design pattern
 	
-	Controller 
-	   Model
-	      Views
+	1. Controller 
+	2. Model
+	3. Views
 	(Pratically built the way MVC should work)
 
 2. Multiple database system
@@ -138,9 +138,9 @@ Developed by Xchrisphp
 				}
 			}
 		}
+		
 
-
- # That's for the first release, more to come.
- # Will share a video demo and will build a full functional web app with this framework.
- # Thank you for using this framework, contributions are allowed please.
+	That's for the first release, more to come.
+	Will share a video demo and will build a full functional web app with this framework.
+	Thank you for using this framework, contributions are allowed please.
 
