@@ -135,6 +135,9 @@ Developed by Xchrisphp
 					// very dynamic 
 					// and you can route to your success page
 					$this->linkTo("home/success?msg=Thank you for your message");
+					// or
+					$this->linkTo("success?msg=Thank you for contact us");
+
 				}
 			}
 		}
@@ -143,4 +146,27 @@ Developed by Xchrisphp
 	That's for the first release, more to come.
 	Will share a video demo and will build a full functional web app with this framework.
 	Thank you for using this framework, contributions are allowed please.
+	<br>
+
+	You can find me on 
+	1. Instagram -> @xchriscode
+	2. Twitter -> @xchriscode
+	3. Facebook -> #xchriscode
+
+	I am from Nigeria, developed this framework to support the PHP Community and to encourage dynamic/responsive use of the PHP language. 
+	<br>
+	Framework can be used by companies, Freelancers etc.
+	<br>
+	# For your 
+		1. PHP
+		2. Python
+		3. Ruby on Rails
+		4. JS 
+		5. Ionic/Angular
+		 
+	# Projects, you can contact me or leave me an email
+	# email -> chrisallison.prog@yahoo.com
+	# phone -> +2348183789446
+	# FB profile -> https://web.facebook.com/chrisallison.prog 
+
 
