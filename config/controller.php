@@ -14,6 +14,8 @@ class AppController extends AppModel
 	// Final view function. This Sets up a controller view
 	final function __view($path, $data="")
 	{
+		$URL = URL_CONFIG::$getUrl;
+		$cont = isset($URL[0]) ? $URL[0] : "";
 		// check if view can be found
 
 		$array = explode('/', $path);
@@ -22,15 +24,25 @@ class AppController extends AppModel
 
 		if(count($array) <= 2)
 		{
-			$location = "app/views";
-			if(!file_exists($location."/{$path}.php"))
+			if(count($array) == 1)
 			{
-				$string = "<h1> {$path} </h1> <p> Check {$location}/{$path}.php </p>";
+				if($cont != "")
+				{
+					$path = $cont."/".$path;
+				}
+			}
 
-				$fh = fopen($location."/{$path}.php", "w");
-				fwrite($fh, $string);
-				fclose($fh);
-			}	
+			$location = "app/views";
+			
+				if(!file_exists($location."/{$path}.php"))
+				{
+					$string = "<h1> {$path} </h1> <p> Check {$location}/{$path}.php </p>";
+
+					$fh = fopen($location."/{$path}.php", "w");
+					fwrite($fh, $string);
+					fclose($fh);
+				}	
+			
 		}
 
 		// Make sure, only one view is loaded after a GET request.
@@ -38,7 +50,7 @@ class AppController extends AppModel
 		{
 			// call header
 			$this->header_file();
-			
+
 			//call view
 			include_once("app/views/".$path.".php");
 
@@ -54,6 +66,27 @@ class AppController extends AppModel
 		// call view method
 		$this->__view($path, $data);
 		// end current view display
+	}
+
+	// Redirect function
+	protected final function redir($path,$wait = "")
+	{
+		$url = URL_CONFIG::$url;
+		if($wait == "")
+		{
+			header("location: {$url}{$path}");	
+		}
+		else
+		{
+			?>
+				<script>
+					setTimeout(function(){
+						window.open('<?="{$url}{$path}"?>',"_self","location=yes");
+					},<?=$wait?>000);
+				</script>
+			<?php
+		}
+		
 	}
 
 	// Dynamic Header Function !private

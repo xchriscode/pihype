@@ -142,17 +142,26 @@ class Local extends URL_CONFIG
 
 	public static function css($name, $config = "")
 	{
-		$location = "public/styles/{$name}.css";
-
-		if(file_exists($location))
+		if(preg_match("/[http][https]/", $name) == false)
 		{
-			$link = '<link rel="stylesheet" type="text/css" href="'.self::$url.$location.'" '.$config.'/>';
-			return $link;
+			$location = "public/styles/{$name}.css";
+
+			if(file_exists($location))
+			{
+				$link = '<link rel="stylesheet" type="text/css" href="'.self::$url.$location.'" '.$config.'/>';
+				return $link;
+			}
+			else
+			{
+				echo "[{$name}.css] not found! in public/styles";
+			}	
 		}
 		else
 		{
-			echo "[{$name}.css] not found! in public/styles";
+			$link = '<link rel="stylesheet" type="text/css" href="'.$name.'" '.$config.'/>';
+				return $link;
 		}
+		
 	}
 
 

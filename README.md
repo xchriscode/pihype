@@ -29,7 +29,7 @@ Developed by Xchriscode
 	// example
 	-> You want to get images from the public/images directory
 		
-		 local::img("image.png")
+		 local::img("image.png") or local::img("image")
 		  
 		  # This will get the image and create the < img > tag
 		  # Can take upto 2 parameters, 1 => image name 2 => attributes eg class="name" etc.
@@ -79,8 +79,11 @@ Developed by Xchriscode
 				$id = 1;
 				if($id == 1)
 				{
-					$this->routeTo("home/contact");
+					$this->routeTo("home/contact") or $this->routeTo("contact");
 					// very easy and dynamic
+					// Or can redirect to a new controller or this same controller with a delay
+					$this->redir("home/contact", 5) 
+					// 5 seconds
 				}
 			}
 		}
@@ -125,7 +128,7 @@ Developed by Xchriscode
 			public function contact()
 			{
 				// we can get the return data by doing
-				$valid_user = $this->model("@contact");
+				$valid_user = $this->is_ready("@contact");
 				// that's all, the return data will be passed tp $valid_user variable
 
 				// so we can do our checking and routing here
@@ -137,7 +140,8 @@ Developed by Xchriscode
 					// and you can route to your success page
 					$this->linkTo("home/success?msg=Thank you for your message");
 					// or
-					$this->linkTo("success?msg=Thank you for contact us");
+					message::$status = "Thank you for contact us";
+					$this->linkTo("success");
 
 				}
 			}

@@ -13,8 +13,8 @@ $hpc->resources(URL_CONFIG::config([
 // URL_CONFIG Class
 class URL_CONFIG extends HelperClass
 {
-	protected static $url;
-	protected static $getUrl;
+	public static $url;
+	public static $getUrl;
 
 	static function config($arr)
 	{

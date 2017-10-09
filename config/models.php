@@ -9,23 +9,37 @@ class AppModel extends dbMigrate
 	public  static $model_name = "";
 	public  static $model_method = "";
 
-	public function model($model = "")
+	// make new model request
+	final public function model($name = "")
 	{
-		if(self::$model_name != "")
+		
+		$args = explode("/", $name);
+		$model = strpos($args[0],"@") >= 0 ? substr($args[0], 1) : $args[0];
+		$method = isset($args[1]) ? $args[1] : "";
+		$param = isset($args[2]) ? $args[2] : "";
+
+		$data = $this->call_model($model, $method, $param);
+
+		return $data;
+	
+	}
+
+	// collect when action model request
+	final public function is_ready($name)
+	{
+		if(self::$model_name != "" && (self::$model_name == substr($name, 1)))
 		{
 			$model = self::$model_name;
 			$method = self::$model_method;
 			$param = "";
+			$data = $this->call_model($model, $method, $param);
+			return $data;
 		}
-		else
-		{
-			$args = explode("/", $model);
-			$model = strpos($args[0],"@") >= 0 ? substr($args[0], 1) : $args[0];
-			$method = isset($args[1]) ? $args[1] : "";
-			$param = isset($args[2]) ? $args[2] : "";
-		}
+	}
 
-		
+
+	final private function call_model($model, $method, $param = "")
+	{
 		if(!empty($model))
 		{
 			// check destination folder < app/model >
@@ -61,6 +75,6 @@ class AppModel extends dbMigrate
 			{
 				echo "Invalid Model file < {$model}.php >, please create this model file in app/model";
 			}
-		}
+		}	
 	}
 }	
