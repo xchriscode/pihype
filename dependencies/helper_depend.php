@@ -1,5 +1,5 @@
 <?php
-class HelperClass
+class HelperClass extends errorHandler
 {	
 	// Resources helper
 	function resources($type)

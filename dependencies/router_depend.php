@@ -66,6 +66,7 @@ class Router extends HelperClass
 		}
 		else
 		{
+			errorHandler::log("Controller {$name} not found!",1);
 			return false;
 		}
 		
@@ -119,10 +120,8 @@ class Router extends HelperClass
 
 		// Make sure Argument is an array
 		if(is_array($obj))
-		{		
+		{	
 			// ok create controller and method by default
-			if(count($_URL_) > 0)
-			{
 				$location = "app/controller/";
 
 				foreach($obj as $cont => $meths)
@@ -136,7 +135,7 @@ class Router extends HelperClass
 							$class = ucwords($cont);
 							$build = "
 <?php
-class {$class} extends Controller
+class {$class} extends AppController
 {
 	public function index()
 	{
@@ -169,7 +168,7 @@ class {$class} extends Controller
 // for proper indentation
 							$build = "
 <?php
-class {$class} extends Controller
+class {$class} extends AppController
 {
 	";
 
@@ -210,7 +209,7 @@ $build .=  "
 							fclose($fh);
 						}
 					}
-				}
+				
 			}
 
 			// load controller and view
@@ -221,32 +220,38 @@ $build .=  "
 				if(!empty($root))
 				{
 					$root = explode("#", $root);
+
 					// now check controller existance
 					if(file_exists("app/controller/{$root[0]}_controller.php"))
 					{
-						// load controller;
-						$controller = self::controller($root[0]);
+						// AppController
+						include_once("config/controller.php");
+						$controller = new AppController();
+						
+						// load controller
+						include_once("app/controller/{$root[0]}_controller.php");
 
-						if($controller !== false)
+						$control = ucwords($root[0]);
+
+						// create a new instance
+						if(class_exists($control))
 						{
-							// load view
-							if(isset($root[1]))
-							{
-								$controller->__view("{$root[0]}/{$root[1]}");
-							}	
+							$instance = new $control;
+							// load method
+							$instance->{$root[1]}();
+							$controller->__view("{$root[0]}/{$root[1]}");
+
 						}
 						else
 						{
-							// throw controller error
-							die("Invalid controller {$root[0]}. Please create controller and reload this page.");
+							errorHandler::log("Invalid controller {$root[0]}. Please create controller and reload this page.",2);
 						}
-
 						
 					}
 					else
 					{
 						// Throw error
-						die(strtoupper($root[0])." Controller not found!");
+						errorHandler::log(strtoupper($root[0])." Controller not found!",1);
 					}
 				} 
 			}
@@ -297,7 +302,7 @@ $build .=  "
 								}
 								else
 								{
-									echo("Cannot find > {$cont} > {$meth} in {$cont}_controller.php");
+									errorHandler::log("Cannot find method | {$meth} | in {$cont}_controller.php",2);
 								}
 							}
 
@@ -344,12 +349,12 @@ $build .=  "
 									}
 									else
 									{
-										die("Cannot find > {$cont} > {$meth} in {$cont}_controller.php");
+										errorHandler::log("Cannot find method | {$meth} | in {$cont}_controller.php",2);
 									}
 								 }
 								 else
 								 {
-								 	die("Invalid < {$meth}> View < {$cont} > in config/router.php ");
+								 	errorHandler::log("Invalid < {$meth}> View < {$cont} > in config/router.php ",2);
 								 }
 							}
 						}
@@ -357,13 +362,13 @@ $build .=  "
 				}
 				else
 				{
-					die("Unknown controller < {$cont} >, not set in config/router.php");
+					errorHandler::log("Unknown controller < {$cont} >, not set in config/router.php",1);
 				}
 			}
 		}
 		else
 		{
-			die("Route Views Argument must be an array");
+			errorHandler::log("Route Views Argument must be an array",1);
 		}
 		
 		return ["type" => "controller"];

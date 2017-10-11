@@ -11,6 +11,9 @@ class AppController extends AppModel
 	// @params footers
 	public static $footers = "";
 
+	// @params 
+	public static $noview = "";
+
 	// Final view function. This Sets up a controller view
 	final function __view($path, $data="")
 	{
@@ -20,7 +23,7 @@ class AppController extends AppModel
 
 		$array = explode('/', $path);
 
-		self::$viewBox[] = isset($array[1]) ? $array[1] : "";
+		self::$viewBox[] = isset($array[1]) ? $array[1] : "";		
 
 		if(count($array) <= 2)
 		{
@@ -33,7 +36,29 @@ class AppController extends AppModel
 			}
 
 			$location = "app/views";
-			
+
+			$include_file = 1;
+
+			if(!empty(self::$noview))
+			{
+				if($cont."/".self::$noview != $path)
+				{
+					if(!file_exists($location."/{$path}.php"))
+					{
+						$string = "<h1> {$path} </h1> <p> Check {$location}/{$path}.php </p>";
+
+						$fh = fopen($location."/{$path}.php", "w");
+						fwrite($fh, $string);
+						fclose($fh);
+					}
+				}
+				else
+				{
+					$include_file = 0;
+				}
+			}
+			else
+			{
 				if(!file_exists($location."/{$path}.php"))
 				{
 					$string = "<h1> {$path} </h1> <p> Check {$location}/{$path}.php </p>";
@@ -42,12 +67,16 @@ class AppController extends AppModel
 					fwrite($fh, $string);
 					fclose($fh);
 				}	
+			}
+			
+				
 			
 		}
 
 		// Make sure, only one view is loaded after a GET request.
-		if(count(self::$viewBox) == 1)
+		if(count(self::$viewBox) == 1 && $include_file == 1)
 		{
+
 			// call header
 			$this->header_file();
 
@@ -60,10 +89,38 @@ class AppController extends AppModel
 		
 	}
 
+	// Final noview function
+	final function noview($array)
+	{
+		if(is_array($array))
+		{
+			foreach($array as $key => $comment)
+			{
+				if(is_string($key))
+				{
+					self::$noview = $key;
+				}
+				else
+				{
+					self::$noview = $comment;
+				}
+			}
+		}
+		else
+		{
+			echo "Noview Parameter must be an array";
+		}
+	}
+
 	// Callable function for a new route
 	protected final function routeTo($path, $data="")
 	{
+		$getMethod = explode("/", $path);
 		// call view method
+		$method = end($getMethod);
+		$this->{$method}();
+		
+		// Load method view
 		$this->__view($path, $data);
 		// end current view display
 	}

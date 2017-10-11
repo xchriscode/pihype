@@ -52,7 +52,7 @@ class Local extends URL_CONFIG
 			 }
 			 else
 			 {
-			 	echo "[$file] not found in $location";
+			 	errorHandler::log("[$file] not found in $location",2);
 			 }
 
 
@@ -81,7 +81,7 @@ class Local extends URL_CONFIG
 			}
 			else
 			{
-				echo  "[$file] not found in $location";
+				errorHandler::log("[$file] not found in $location",2);
 			}
 		}
 
@@ -153,7 +153,7 @@ class Local extends URL_CONFIG
 			}
 			else
 			{
-				echo "[{$name}.css] not found! in public/styles";
+				errorHandler::log("[{$name}.css] not found! in public/styles",2);
 			}	
 		}
 		else
@@ -176,7 +176,7 @@ class Local extends URL_CONFIG
 		}
 		else
 		{
-			echo "[{$name}.js] not found! in public/javascripts";
+			errorHandler::log("[{$name}.js] not found! in public/javascripts",2);
 		}
 	}
 }

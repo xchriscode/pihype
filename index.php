@@ -1,5 +1,8 @@
 <?php
 
+// #Error reporting class
+include_once("dependencies/error_handler_depend.php");
+
 // #Helper Class, prepares GET requests 
 include_once("dependencies/helper_depend.php");
 

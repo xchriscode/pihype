@@ -22,11 +22,12 @@ class URL_CONFIG extends HelperClass
 		{
 			// on a live server
 			self::$url = $arr['liveurl'];
+			self::$logError = 1;
 		}
 		else
 		{
 			// Your development server URL 
-			self::$url = "http://";
+			self::$url = "127.0.0.1/xchrisphp/XchrisPHP/";
 		}
 
 		self::$getUrl = isset($_GET['gid']) ? explode('/',rtrim($_GET['gid'],"/ ")) : "";

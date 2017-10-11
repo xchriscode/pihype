@@ -43,7 +43,7 @@ class AppModel extends dbMigrate
 		if(!empty($model))
 		{
 			// check destination folder < app/model >
-			$location = "app/model/{$model}.php";
+			$location = "app/model/{$model}_model.php";
 			if(file_exists($location))
 			{
 				include_once($location);
@@ -68,12 +68,12 @@ class AppModel extends dbMigrate
 				}
 				else
 				{
-					echo "Model < $class_name > Not found in $location";
+					errorHandler::log("Model < $class_name > Not found in $location",2);
 				}
 			}
 			else
 			{
-				echo "Invalid Model file < {$model}.php >, please create this model file in app/model";
+				errorHandler::log("Invalid Model file < {$model}_model.php >, please create this model file in app/model",2);
 			}
 		}	
 	}
