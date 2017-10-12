@@ -4,31 +4,44 @@
 	<title>Pihype</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">  
+	<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet"> 
+	<meta property="og:url"           content="https://www.pihype.com" />
+  <meta property="og:type"          content="application" />
+  <meta property="og:title"         content="Pihype PHP MVC framework." />
+  <meta property="og:description"   content="A PHP Framework for faster and controlled development. " />
+  <meta property="og:image"         content="http://www.pihype.com/public/images/pihype_logo.png" />  
 </head>
 <body>
 <style type="text/css">
-	html,body{margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Arimo', sans-serif;}
-	.header{background: #fff200; max-width: 100%; height: 50px; padding: 10px;box-shadow: 0px 0px 10px #eee;border-bottom: 1px solid #fff; position: relative; z-index: 88;}
-	.header .logo{}
-	.header .logo img{width: 170px;margin-top: -9px;}
-	.sidebar{width: 200px;float: left;}
-	.sidebar ul{padding: 20px; background: #fcfcfc; border: 1px solid #eee; margin: auto; width: 100%;
-		list-style: none; margin-left: -20px; margin-top: -10px; box-shadow: 0px 0px 4px #eee;}
-	.content{width: 75%; float: left; margin-left: 4%; background: #fff; border: 1px solid #eee; margin-top: 10px;
-		padding: 20px; box-shadow: 0px 0px 4px #eee;}
-	.content p{line-height: 31px;}
-	.sidebar ul li{width: 100%; padding: 10px; margin-bottom: 6px; border-bottom: 1px solid #fff200;
-		box-shadow: 0px 0px 4px #eee; transition: all 0.4s ease;}
-	.sidebar ul li a{color: #000; text-decoration: none; font-size: 17px;}
+	html,body{margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Work Sans', sans-serif;
+	background: url('public/images/1357128.jpg') no-repeat; background-position: top central; background-size: cover;
+	background-attachment: fixed;}
+		.header{background: rgb(60, 58, 58); width: 100%; height: 50px; padding: 10px;border-top: 4px solid #fff200; position: fixed; z-index: 88; box-shadow: 0px 0px 10px #000;}
+		.header .logo{width: 15%;padding: 10px;margin-top: -17px;margin-left: -10px;}
+		.header .logo img{width: 170px;margin-top: 1px;border-radius: 20px;height: 61px;}
+		.sidebar{width: 200px;float: left; margin-top: 80px;}
+		.sidebar ul{padding: 20px; background: rgba(0, 0, 0, 0.03); border: 0px solid #eee; margin: auto; width: 100%;
+			list-style: none; margin-left: -20px; margin-top: -10px; box-shadow: 0px 0px 0px #eee;}
+		.content{width: 79%; float: left; margin-left: 2%;  border: 0px solid #fff200; margin-top: 10px;
+			padding: 20px; box-shadow: 0px 0px 1px #eee; margin-top: 90px;
+	}
+	.content p{line-height: 31px;color: #fff;}
+	.sidebar ul li{width: 100%; padding: 10px; margin-bottom: 6px; border-bottom: 0px solid #fff200;
+		box-shadow: 0px 0px 0px #eee; transition: all 0.4s ease;}
+	.sidebar ul li a{color: #fff; text-decoration: none; font-size: 16px;padding-left: 8px;}
 	.sidebar ul li:hover{background: #fff200; cursor: pointer;}
 	.sidebar ul li:hover a{color: #000;}
-	.active{background: #fff200;}
+	.active{background: #fff200;color: #000 !important;}
+	.active a{color: #000 !important;}
 	.tab-hide{display: none;}
 	.tab-show{display: block; transition: all 0.4s ease-in-out;}
-	.tab-show h1{font-size: 30px; color: #000; font-weight: normal; margin: 0; padding-bottom: 0px;
-		border-bottom: 0px solid #fff200; margin-bottom: 20px; text-transform: capitalize;
-		border-left: 5px solid #eee; padding-left: 5px;}
+	.tab-show h1{font-size: 26px; color: #fff; font-weight: normal; margin: 0; padding-bottom: 0px;
+		border-bottom: 0px solid #fff200; margin-bottom: 20px; text-transform: uppercase;
+		border-left: 5px solid #fff200; padding-left: 14px;
+	letter-spacing: 1px;
+	}
+	.tab-code p{color: #000;}
 	.tab-show small{font-size: 18px;}
 	.tab-box{}
 	.tab-box ul{list-style: none; background: #fcfcfc; border:1px solid #eee;}
@@ -45,7 +58,12 @@
 		50%{color: #000;}
 		100%{color: #fff200; }
 	}
-
+	ol li{color: #fff;}
+	 ol li pre{color: #000 !important;}
+	.download{float: right; width: 20%;margin-top: 15px; position: relative; top: 0; left: 0;}
+	.logo{width: 80%; float: left;}
+	.download a{color: #000; padding: 14px; border:; border-radius: 9px; text-decoration: none; margin-top: 8px; margin-left: 50%;background: #fff200;box-shadow: 0px 0px 2px #000;}
+	.download a:hover{border:1px solid #000; box-shadow: 0px 0px 15px #000;}
 	#share-buttons img {
 		width: 35px;
 		padding: 5px;
@@ -54,15 +72,29 @@
 		display: inline;
 		}
 	#share-buttons a{text-decoration: none; color: #000;}
+	.info{display: block; position: absolute; top: 193%; background: #3c3a3a; padding: 14px;left: 20%;border: 2px solid #fff200;border-radius: 20px;box-shadow: 0px 0px 3px #000; color: #fff !important;}
+	.tab-box ul{padding-top: 20px; padding-bottom: 20px;}
+	.tab-box ul li{color: #000;}
+	.content{position: relative;}
+	.next-btn{position: fixed; top: 80%; right: 0; display: none;  transition: all 0.4s ease-in-out;}
+	.next-btn a{color: #000; background: #fff200; padding: 15px; border-radius: 30px; display: inline-block;}
+	.next-btn .next{ }
+	.next-btn .prev{background: rgb(60, 58, 58); color: #fff200; border:1px solid #fff200;}
 	@media only screen and (max-width: 500px)
 	{
-		.sidebar{width: 93%;}
+		.sidebar{width: 97%; height: 200px; overflow: auto;}
 		h2{display: inline-block; font-size: 1.1em;}
+		.logo{width: 30%; margin-left: -20px;}
+		.logo img{width: 100px; margin-left: -20px;}
+		.content{margin-top: 10px;width: 87%;margin-left: 0%;margin-right: 0px;}
+		.download a{margin-left: -80%;}
+		.info{left: -180%; display: none;}
+		.download a:hover .info{display: block;}
 	}
 </style>
 
 <header class="header">
-	<aside class="logo"><img src="public/images/pihype_logo.png"></aside>
+	<aside class="logo"><img src="public/images/p_logo.png"></aside>
 </header>
 
 <script>
@@ -84,8 +116,17 @@
 					active[x].setAttribute("class","");
 				}
 			}
+			var id;
 			// ok set active
-			e.setAttribute("class","active");
+			if(typeof e == "number"){
+				id = e;
+			}
+			else
+			{
+				e.setAttribute("class","active");
+			 	id = e.getAttribute("data-id");	
+			}
+			
 			// set tab-show to tab-hide
 			var show = document.getElementsByClassName("tab-show");
 			if(show.length > 0)
@@ -97,27 +138,53 @@
 			}
 
 			tab.setAttribute("class","tab-show");
+
+			var nextbtn = document.getElementById("nextbtn");
+			
+			if(id == 0)
+			{
+				nextbtn.innerHTML = '<a href="#controller" onclick="showtab(this,\'controller\')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>';
+			}
+			else
+			{
+				nextbtn.innerHTML = "";
+				var nb = document.getElementById(id+"nextbtn").innerHTML;
+				nextbtn.innerHTML = nb;
+			}
+
+
 		}
 	}
+
+
 </script>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <!-- main section -->
-<section>
+<section style="clear: both;">
 	<aside class="sidebar">
 		<ul>
-			<li onclick="showtab(this,'getting_started')" class="active"><a href="javascript:void(0)">Getting Started</a></li>
-			<li onclick="showtab(this,'controller')"><a href="javascript:void(0)" >Controller</a></li>
-			<li onclick="showtab(this,'model')"><a href="javascript:void(0)" >Model</a></li>
-			<li onclick="showtab(this,'views')"><a href="javascript:void(0)" >Views</a></li>
-			<li onclick="showtab(this,'helpers_plugins')"><a href="javascript:void(0)" >Helpers / Plugins</a></li>
-			<li onclick="showtab(this,'images')"><a href="javascript:void(0)" >Images</a></li>
-			<li onclick="showtab(this,'styles')"><a href="javascript:void(0)" >Styles</a></li>
-			<li onclick="showtab(this,'javascript')"> <a href="javascript:void(0)" >Javascripts</a></li>
-			<li onclick="showtab(this,'database')"><a href="javascript:void(0)" >Database</a></li>
-			<li onclick="showtab(this,'routers')"><a href="javascript:void(0)" >Routers</a></li>
-			<li onclick="showtab(this,'header_footer')"><a href="javascript:void(0)" >Header & Footers</a></li>
-			<li onclick="showtab(this,'configuration')"><a href="javascript:void(0)" >Configurations</a></li>
-			<li onclick="showtab(this,'examples')"><a href="javascript:void(0)" >Examples</a></li>
+			<li onclick="showtab(this,'getting_started')" class="active" data-id="0"><a href="javascript:void(0)" >Getting Started</a></li>
+			<li onclick="showtab(this,'controller')" data-id="1"><a href="javascript:void(0)" >Controller</a></li>
+			<li onclick="showtab(this,'model')" data-id="2"><a href="javascript:void(0)" >Model</a></li>
+			<li onclick="showtab(this,'views')" data-id="3"><a href="javascript:void(0)" >Views</a></li>
+			<li onclick="showtab(this,'helpers_plugins')" data-id="4"><a href="javascript:void(0)" >Helpers / Plugins</a></li>
+			<li onclick="showtab(this,'images')" data-id="5"><a href="javascript:void(0)" >Images</a></li>
+			<li onclick="showtab(this,'styles')" data-id="6"><a href="javascript:void(0)" >Styles</a></li>
+			<li onclick="showtab(this,'javascript')" data-id="7"> <a href="javascript:void(0)" >Javascripts</a></li>
+			<li onclick="showtab(this,'database')" data-id="8"><a href="javascript:void(0)" >Database</a></li>
+			<li onclick="showtab(this,'routers')" data-id="9"><a href="javascript:void(0)" >Routers</a></li>
+			<li onclick="showtab(this,'header_footer')" data-id="10"><a href="javascript:void(0)" >Header & Footers</a></li>
+			<li onclick="showtab(this,'configuration')" data-id="11"><a href="javascript:void(0)" >Configurations</a></li>
+			<li onclick="showtab(this,'examples')" data-id="12"><a href="javascript:void(0)" >Examples</a></li>
 		</ul>
 	</aside>
 
@@ -125,14 +192,16 @@
 
 	<div id="getting_started" class="tab-show">
 		<h1>Welcome to Pihype</h1>
-		<small style="color: green; ">A PHP Framework for faster and controlled development. Developed by @xchriscode </small>
+		<small style="color: #999; ">A PHP Framework for faster and controlled development. Developed by @xchriscode </small><!-- 
 		<small style="color: #f90; display: block; margin-top: 15px;">This is the default Route view, you can change it in <span style="padding: 5px; background: #fcfcfc; color: #000;">config/router.php</span></small>
 		
-
+ -->
 		<p class="version">Version 1.0-alpha</p>
 
+		<div class="fb-like" style="float: right; display: inline-block;" data-href="https://web.facebook.com/Pihype-263562584165504/" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 
-		<h3>Share Pihype with your folks.</h3>
+		<div style="clear: both;"></div>
+		<h3 style="font-weight: normal; color: #fff;">Share Pihype with your folks.</h3>
 		<!-- I got these buttons from pihype.com -->
 		<div id="share-buttons">
 		    
@@ -208,7 +277,7 @@
 
 		</div>
 <hr>
-<h2 style="font-weight: normal;">Features & Brief Overview</h2>
+<h2 style="font-weight: normal; color: #fff200;">Features & Brief Overview</h2>
 
 <ol>
 <li>
@@ -351,7 +420,7 @@ and more..</li>
  }
 </code></pre>
 
-<h2 style="border-bottom: 1px solid #eee; padding: 10px; font-weight: normal;">Application folder structure</h2>
+<h2 style=" padding: 10px; font-weight: normal; color: #fff200;">Application folder structure</h2>
 
 		<div class="tab-box">
 		<ul>
@@ -377,6 +446,8 @@ and more..</li>
 				</ul></li>
 		</ul>
 		</div>
+
+		
 	</div>
 
 	<div id="controller" class="tab-hide">
@@ -430,6 +501,11 @@ and more..</li>
 		<p>
 			Controller can only work when registered in the config/router.php file. Please take note.
 		</p>
+
+		<div class="next-btn" id="1nextbtn">
+			<a href="#getting_started" onclick="showtab(0,'getting_started')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#model" onclick="showtab(2,'model')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
+		</div>
 	</div>
 
 	<div id="model" class="tab-hide">
@@ -493,6 +569,11 @@ and more..</li>
 
 			</div>
 		</div>	
+
+		<div class="next-btn" id="2nextbtn">
+			<a href="#controller" onclick="showtab(1,'controller')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#views" onclick="showtab(3,'views')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
+		</div>
 	</div>
 
 
@@ -517,6 +598,11 @@ and more..</li>
 			</p>
 
 			</div>
+		</div>
+
+		<div class="next-btn" id="3nextbtn">
+			<a href="#model" onclick="showtab(3,'model')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#helpers_plugins" onclick="showtab(4,'helpers_plugins')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
 		</div>
 	</div>
 
@@ -687,6 +773,11 @@ and more..</li>
 		</div>
 
 
+		<div class="next-btn" id="4nextbtn">
+			<a href="#views" onclick="showtab(3,'views')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#images" onclick="showtab(5,'images')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
+		</div>
+
 	</div>
 
 	<div id="images" class="tab-hide">
@@ -711,6 +802,11 @@ and more..</li>
 			</p>
 
 			</div>
+		</div>
+
+		<div class="next-btn" id="5nextbtn">
+			<a href="#helpers_plugins" onclick="showtab(4,'helpers_plugins')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#styles" onclick="showtab(6,'styles')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
 		</div>
 	</div>
 
@@ -737,6 +833,11 @@ and more..</li>
 
 			</div>
 		</div>
+
+		<div class="next-btn" id="6nextbtn">
+			<a href="#images" onclick="showtab(5,'images')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#javascript" onclick="showtab(7,'javascript')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
+		</div>
 	</div>
 
 	<div id="javascript" class="tab-hide">
@@ -761,6 +862,11 @@ and more..</li>
 			</p>
 
 			</div>
+		</div>
+
+		<div class="next-btn" id="7nextbtn">
+			<a href="#styles" onclick="showtab(6,'styles')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#database" onclick="showtab(8,'database')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
 		</div>
 	</div>
 
@@ -787,6 +893,8 @@ and more..</li>
 			</p>
 
 			</div>
+
+
 		</div>
 
 
@@ -813,6 +921,11 @@ and more..</li>
 
 
 			</div>
+		</div>
+
+		<div class="next-btn" id="8nextbtn">
+			<a href="#javascript" onclick="showtab(7,'javascript')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#routers" onclick="showtab(9,'routers')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
 		</div>
 	</div>
 
@@ -847,6 +960,11 @@ and more..</li>
 
 
 			</div>
+		</div>
+
+		<div class="next-btn" id="9nextbtn">
+			<a href="#database" onclick="showtab(8,'database')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#header_footer" onclick="showtab(10,'header_footer')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
 		</div>
 	</div>
 
@@ -891,6 +1009,11 @@ and more..</li>
 
 
 			</div>
+		</div>
+
+		<div class="next-btn" id="10nextbtn">
+			<a href="#routers" onclick="showtab(9,'routers')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#configuration" onclick="showtab(11,'configuration')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
 		</div>
 	</div>
 
@@ -958,7 +1081,10 @@ and more..</li>
 
 		</div>
 
-
+		<div class="next-btn" id="11nextbtn">
+			<a href="#header_footer" onclick="showtab(10,'header_footer')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#examples" onclick="showtab(12,'examples')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
+		</div>
 	</div>
 
 	<div id="examples" class="tab-hide">
@@ -1086,17 +1212,44 @@ class Newpost extends AppModel
 
 		</div>
 
+		<div class="next-btn" id="12nextbtn">
+			<a href="#configuration" onclick="showtab(11,'configuration')" class="prev"> <i class="fa fa-arrow-left"> Prev </i> </a>
+			<a href="#getting_started" onclick="showtab(0,'getting_started')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
+		</div>
 
 	</div>
 
 	<style type="text/css">
-		.tab-location{display: inline-block; padding: 15px; background: #fcfcfc; box-shadow: 0px 0px 5px #eee;
-			color: #f20; font-size: 17px;}
+		.tab-location{display: inline-block; padding: 15px; background: #fff200; box-shadow: 0px 0px 0px #eee;
+			color: #000; font-size: 17px;}
 		.tab-code{display: block; background: #fcfcfc; border:1px solid #eee; font-size: 17px;
 			margin-top: 10px; padding: 30px; margin-bottom: 10px;}
 	</style>
 		
 	</aside>
 </section>
+
+<div class="next-btn" id="nextbtn" data-ride="true">
+			<a href="#controller" onclick="showtab(1,'controller')" class="next"> <i class="fa fa-arrow-right"> Next </i> </a>
+</div>
+
+<script type="text/javascript">
+	window.onscroll = function() {
+  		var scrollHeight, totalHeight;
+  		scrollHeight = document.body.scrollHeight;
+  		totalHeight = window.scrollY + window.innerHeight;
+
+  		if(totalHeight >= scrollHeight)
+  		{
+  			var nextbtn = document.getElementById("nextbtn");
+  			nextbtn.style.display = "inline-block";
+  		}
+  		else
+  		{
+  			var nextbtn = document.getElementById("nextbtn");
+  			nextbtn.style.display = "none";
+  		}
+	}
+</script>
 </body>
 </html>
